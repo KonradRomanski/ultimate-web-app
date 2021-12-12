@@ -1,0 +1,47 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="E3B48B58-2668-9D31-2756-020389FDD4E6" name="stat">
+<createdBy>Grzegorz</createdBy>
+<createdTime>2021-11-27 18:14:41 UTC</createdTime>
+<generatorID>8875413E-3AA6-4206-DD96-159EF4FA7092</generatorID>
+<ownerDesignName>datamodel</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="action_name" id="91E95B43-3208-43E5-4BC3-4E61FC66E8BB">
+<createdBy>Grzegorz</createdBy>
+<createdTime>2021-11-27 19:35:13 UTC</createdTime>
+<generatorID>0F40CBD1-D088-E757-98DF-4986846AFED9</generatorID>
+<ownerDesignName>datamodel</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="number" id="4A24FCC1-CAF7-0FA1-AC21-074E32A1DE10">
+<createdBy>Grzegorz</createdBy>
+<createdTime>2021-11-27 19:35:13 UTC</createdTime>
+<generatorID>D1358EE8-8E78-18AA-D7A7-7B25C7AD248B</generatorID>
+<ownerDesignName>datamodel</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT027</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="last_action_time" id="AA48FE69-EB79-2EFF-6529-9EB31008913C">
+<createdBy>Grzegorz</createdBy>
+<createdTime>2021-11-27 19:35:13 UTC</createdTime>
+<generatorID>3A4ACFEE-B9D8-08B9-D5C7-562D5FB359DE</generatorID>
+<ownerDesignName>datamodel</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT015</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+</Table>

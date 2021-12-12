@@ -1,0 +1,79 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="4DF206C9-C94D-E8E1-0B53-D1809A489564" name="like_comment">
+<createdBy>Grzegorz</createdBy>
+<createdTime>2021-11-27 18:46:09 UTC</createdTime>
+<ownerDesignName>datamodel</ownerDesignName>
+<engineerTo>
+<item key="6BAC0CDA-1D52-15D3-09E4-0A1F1748EB2B" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="username" id="60B94B4B-CE41-EE6B-FFFB-8A9B4C46D464">
+<createdBy>Grzegorz</createdBy>
+<createdTime>2021-11-27 19:31:42 UTC</createdTime>
+<generatorID>D53750A1-8718-9AE6-AAD7-B19C2A58A7A7</generatorID>
+<ownerDesignName>datamodel</ownerDesignName>
+<engineerTo>
+<item key="6BAC0CDA-1D52-15D3-09E4-0A1F1748EB2B" value="true"/>
+</engineerTo>
+<referedAttribute>83F61307-72D6-487C-D21B-2A206D8E1C1B</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>30</dataTypeSize>
+<ownDataTypeParameters>30,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="username1" id="96389D77-59D5-7D6B-2D35-36AF7E59318A">
+<createdBy>Grzegorz</createdBy>
+<createdTime>2021-11-27 19:42:27 UTC</createdTime>
+<generatorID>11499D23-6ECC-40F5-6295-8E186E3CB354</generatorID>
+<ownerDesignName>datamodel</ownerDesignName>
+<engineerTo>
+<item key="6BAC0CDA-1D52-15D3-09E4-0A1F1748EB2B" value="true"/>
+</engineerTo>
+<referedAttribute>0909B70E-3170-4045-DD01-5DF649ABA3DC</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>30</dataTypeSize>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="post_id" id="F2C72B8B-881B-95C8-A290-6D51EBA8C90E">
+<createdBy>Grzegorz</createdBy>
+<createdTime>2021-11-27 19:42:27 UTC</createdTime>
+<generatorID>11499D23-6ECC-40F5-6295-8E186E3CB354</generatorID>
+<ownerDesignName>datamodel</ownerDesignName>
+<engineerTo>
+<item key="6BAC0CDA-1D52-15D3-09E4-0A1F1748EB2B" value="true"/>
+</engineerTo>
+<referedAttribute>2F98C679-8541-3E4E-F0A3-3014A00F2ECC</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT027</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="317348D9-D108-89AF-DF87-E2322E43286D" name="comment_like PK">
+<createdBy>Grzegorz</createdBy>
+<createdTime>2021-11-27 18:46:43 UTC</createdTime>
+<ownerDesignName>datamodel</ownerDesignName>
+<engineerTo>
+<item key="6BAC0CDA-1D52-15D3-09E4-0A1F1748EB2B" value="true"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>60B94B4B-CE41-EE6B-FFFB-8A9B4C46D464</attributeRef>
+<attributeRef>96389D77-59D5-7D6B-2D35-36AF7E59318A</attributeRef>
+<attributeRef>F2C72B8B-881B-95C8-A290-6D51EBA8C90E</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

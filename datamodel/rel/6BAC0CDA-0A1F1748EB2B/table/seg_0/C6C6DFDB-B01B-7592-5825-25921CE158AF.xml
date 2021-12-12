@@ -1,0 +1,67 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="C6C6DFDB-B01B-7592-5825-25921CE158AF" name="log">
+<createdBy>Grzegorz</createdBy>
+<createdTime>2021-11-27 18:14:41 UTC</createdTime>
+<generatorID>275C6AF4-DFC0-F164-50CC-F17F42AE530F</generatorID>
+<ownerDesignName>datamodel</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="action_type" id="A81CA108-22B1-BCAC-8198-C02E8D8E355B">
+<createdBy>Grzegorz</createdBy>
+<createdTime>2021-11-27 19:35:13 UTC</createdTime>
+<generatorID>8897552E-EC19-5CA5-A108-C430B7EFF61D</generatorID>
+<ownerDesignName>datamodel</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="action_time" id="36F39579-819F-C36F-76DE-3ED8A58CC80B">
+<createdBy>Grzegorz</createdBy>
+<createdTime>2021-11-27 19:35:13 UTC</createdTime>
+<generatorID>2CC86F98-A529-9C9E-9977-397D310948A2</generatorID>
+<ownerDesignName>datamodel</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT015</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="table_name" id="243C811A-57A0-9AA1-BE32-CE924B0143EC">
+<createdBy>Grzegorz</createdBy>
+<createdTime>2021-11-27 19:35:13 UTC</createdTime>
+<generatorID>AED2656F-E292-BB56-483B-0549A39D7579</generatorID>
+<ownerDesignName>datamodel</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="username" id="0585B9C0-3A32-215B-960E-F4EFBE9E24E0">
+<createdBy>Grzegorz</createdBy>
+<createdTime>2021-11-27 19:35:13 UTC</createdTime>
+<generatorID>DF1A92DB-798B-B3AD-C2B5-610CA69E5F4D</generatorID>
+<ownerDesignName>datamodel</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="4BC2A280-58F8-DEDE-4DD5-DD775BF21B47" name="log_user_FK">
+<createdBy>Grzegorz</createdBy>
+<createdTime>2021-11-27 19:35:13 UTC</createdTime>
+<generatorID>E245B167-5D40-8F74-1717-0222C96F81F3</generatorID>
+<ownerDesignName>datamodel</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+</ind_PK_UK>
+</indexes>
+</Table>

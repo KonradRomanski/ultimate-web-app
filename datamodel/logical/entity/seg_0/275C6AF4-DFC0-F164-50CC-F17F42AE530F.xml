@@ -1,0 +1,70 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="275C6AF4-DFC0-F164-50CC-F17F42AE530F" name="log">
+<createdBy>Grzegorz</createdBy>
+<createdTime>2021-11-27 11:03:01 UTC</createdTime>
+<ownerDesignName>datamodel</ownerDesignName>
+<engineerTo>
+<item key="6BAC0CDA-1D52-15D3-09E4-0A1F1748EB2B" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="action_type" id="8897552E-EC19-5CA5-A108-C430B7EFF61D">
+<createdBy>Grzegorz</createdBy>
+<createdTime>2021-11-27 18:59:38 UTC</createdTime>
+<ownerDesignName>datamodel</ownerDesignName>
+<engineerTo>
+<item key="6BAC0CDA-1D52-15D3-09E4-0A1F1748EB2B" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="action_time" id="2CC86F98-A529-9C9E-9977-397D310948A2">
+<createdBy>Grzegorz</createdBy>
+<createdTime>2021-11-27 19:00:21 UTC</createdTime>
+<ownerDesignName>datamodel</ownerDesignName>
+<engineerTo>
+<item key="6BAC0CDA-1D52-15D3-09E4-0A1F1748EB2B" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT015</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="table_name" id="AED2656F-E292-BB56-483B-0549A39D7579">
+<createdBy>Grzegorz</createdBy>
+<createdTime>2021-11-27 19:01:36 UTC</createdTime>
+<ownerDesignName>datamodel</ownerDesignName>
+<engineerTo>
+<item key="6BAC0CDA-1D52-15D3-09E4-0A1F1748EB2B" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="username" id="DF1A92DB-798B-B3AD-C2B5-610CA69E5F4D">
+<createdBy>Grzegorz</createdBy>
+<createdTime>2021-11-27 19:31:42 UTC</createdTime>
+<generatorID>E245B167-5D40-8F74-1717-0222C96F81F3</generatorID>
+<ownerDesignName>datamodel</ownerDesignName>
+<engineerTo>
+<item key="6BAC0CDA-1D52-15D3-09E4-0A1F1748EB2B" value="true"/>
+</engineerTo>
+<referedAttribute>83F61307-72D6-487C-D21B-2A206D8E1C1B</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>30</dataTypeSize>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+</Entity>

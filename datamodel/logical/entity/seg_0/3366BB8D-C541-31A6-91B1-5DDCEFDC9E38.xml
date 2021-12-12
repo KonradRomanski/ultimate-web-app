@@ -1,0 +1,48 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="3366BB8D-C541-31A6-91B1-5DDCEFDC9E38" name="like_project">
+<createdBy>Grzegorz</createdBy>
+<createdTime>2021-11-27 18:43:11 UTC</createdTime>
+<ownerDesignName>datamodel</ownerDesignName>
+<engineerTo>
+<item key="6BAC0CDA-1D52-15D3-09E4-0A1F1748EB2B" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="username" id="7811338B-D51C-2CF6-A39D-9D4732CEE4EA">
+<createdBy>Grzegorz</createdBy>
+<createdTime>2021-11-27 19:31:42 UTC</createdTime>
+<generatorID>4A16B907-32F0-F102-C086-28A5593485FE</generatorID>
+<ownerDesignName>datamodel</ownerDesignName>
+<engineerTo>
+<item key="6BAC0CDA-1D52-15D3-09E4-0A1F1748EB2B" value="true"/>
+</engineerTo>
+<referedAttribute>83F61307-72D6-487C-D21B-2A206D8E1C1B</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>30</dataTypeSize>
+<ownDataTypeParameters>30,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="AD400505-36FE-5D27-9D91-48BE8F80A9A3" name="project_like PK">
+<createdBy>Grzegorz</createdBy>
+<createdTime>2021-11-27 18:43:21 UTC</createdTime>
+<ownerDesignName>datamodel</ownerDesignName>
+<engineerTo>
+<item key="6BAC0CDA-1D52-15D3-09E4-0A1F1748EB2B" value="true"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>7811338B-D51C-2CF6-A39D-9D4732CEE4EA</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

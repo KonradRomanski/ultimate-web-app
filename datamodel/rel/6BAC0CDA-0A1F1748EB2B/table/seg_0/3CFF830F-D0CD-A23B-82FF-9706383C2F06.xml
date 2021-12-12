@@ -1,0 +1,73 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="3CFF830F-D0CD-A23B-82FF-9706383C2F06" name="like_post">
+<createdBy>Grzegorz</createdBy>
+<createdTime>2021-11-27 18:14:41 UTC</createdTime>
+<generatorID>A3A7EBA8-0F39-8AD8-9F38-1D37AB300C57</generatorID>
+<ownerDesignName>datamodel</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="post_post_id" id="C71CC8FD-C420-967F-7650-9C1698E89579">
+<createdBy>Grzegorz</createdBy>
+<createdTime>2021-11-27 19:35:13 UTC</createdTime>
+<generatorID>E8E17FA0-2E27-6703-C39A-8404F0E91CEA</generatorID>
+<ownerDesignName>datamodel</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT027</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="F124628B-28BE-2110-379D-42B4810277C5" referredColumn="46D8944D-5447-F83B-2EB6-97489132E152"/>
+</associations>
+</Column>
+<Column name="username" id="13386FBE-06E5-6474-B68E-3679E8AFA492">
+<createdBy>Grzegorz</createdBy>
+<createdTime>2021-11-27 19:35:13 UTC</createdTime>
+<generatorID>B1051D52-8370-D9B9-5F45-584B350F01A2</generatorID>
+<ownerDesignName>datamodel</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="7075EE0B-4336-3AFF-8C7F-5B8786925900" name="like_post_PK">
+<createdBy>Grzegorz</createdBy>
+<createdTime>2021-11-27 19:35:13 UTC</createdTime>
+<generatorID>DF162CC5-7110-43A3-BE3F-78151122CAA2</generatorID>
+<ownerDesignName>datamodel</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="13386FBE-06E5-6474-B68E-3679E8AFA492"/>
+<colUsage columnID="C71CC8FD-C420-967F-7650-9C1698E89579"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="07DDB680-A858-82C9-5D31-DC337FA0961F" name="like_post_user_FK">
+<createdBy>Grzegorz</createdBy>
+<createdTime>2021-11-27 19:35:13 UTC</createdTime>
+<generatorID>D3CB57E1-CE3B-34CE-6B9C-EFEEC70A9E86</generatorID>
+<ownerDesignName>datamodel</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+</ind_PK_UK>
+<ind_PK_UK id="4AC76B37-AC47-D7D2-B40B-E64CC7C037F0" name="like_post_post_FK">
+<createdBy>Grzegorz</createdBy>
+<createdTime>2021-11-27 19:35:13 UTC</createdTime>
+<generatorID>50E8EB68-F269-BF7F-F132-40837FC38287</generatorID>
+<ownerDesignName>datamodel</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="C71CC8FD-C420-967F-7650-9C1698E89579"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>
