@@ -1,0 +1,139 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="36A9FC2B-06BB-B9B7-FB3C-F8ADE405CA4E" name="post">
+<createdBy>konra</createdBy>
+<createdTime>2021-12-12 21:19:24 UTC</createdTime>
+<generatorID>87F2A4F8-0004-6F2B-D09F-A53E3C76B5CE</generatorID>
+<ownerDesignName>datamodel</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id" id="0B1CB0C4-7982-2E69-2326-6BCED220F608">
+<createdBy>konra</createdBy>
+<createdTime>2021-12-12 21:19:24 UTC</createdTime>
+<generatorID>0E083D32-9C07-212E-46D1-9E5029E9581C</generatorID>
+<ownerDesignName>datamodel</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementColumn>true</autoIncrementColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="titile" id="4CDDD516-F330-54FA-BAB7-018DAC33AAAF">
+<createdBy>konra</createdBy>
+<createdTime>2021-12-12 21:19:24 UTC</createdTime>
+<generatorID>F6A672D5-8E26-DFBB-E9A7-9A331CF1B670</generatorID>
+<ownerDesignName>datamodel</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>180</dataTypeSize>
+<ownDataTypeParameters>180,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="content" id="4C972D4E-3A11-D1FD-1151-64FD7B10E223">
+<createdBy>konra</createdBy>
+<createdTime>2021-12-12 21:19:24 UTC</createdTime>
+<generatorID>A3C941B5-82E5-8CC0-2141-B88B359BACA7</generatorID>
+<ownerDesignName>datamodel</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT040</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="created_at" id="D8D0C0B2-5EF0-9978-10BA-32EA1336C077">
+<createdBy>konra</createdBy>
+<createdTime>2021-12-12 21:19:24 UTC</createdTime>
+<generatorID>954E4639-2872-63B0-1F83-CE8399F20EA3</generatorID>
+<ownerDesignName>datamodel</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT015</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="updated_at" id="4F47769A-3E80-2D44-1ABF-4BE6284BAE52">
+<createdBy>konra</createdBy>
+<createdTime>2021-12-12 21:19:24 UTC</createdTime>
+<generatorID>6C0827BF-ECBC-9635-100E-85B5A2F78261</generatorID>
+<ownerDesignName>datamodel</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT015</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="user_id" id="99ED3E18-4F4F-17C9-FF03-65550D429BB8">
+<createdBy>konra</createdBy>
+<createdTime>2021-12-12 21:19:24 UTC</createdTime>
+<generatorID>2E99BC1F-6B1F-93D0-56D7-C6BA94308242</generatorID>
+<ownerDesignName>datamodel</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="6656CEBD-70ED-D193-B1CE-1C81D8A30F6C" referredColumn="07661F31-763A-E0F0-2C87-609F25DBC883"/>
+</associations>
+</Column>
+<Column name="project_id" id="B9CA718D-2751-6DF3-D7EA-330159389554">
+<createdBy>konra</createdBy>
+<createdTime>2021-12-12 21:19:24 UTC</createdTime>
+<generatorID>5C280C6C-F2D5-437F-4FA9-4A337B697854</generatorID>
+<ownerDesignName>datamodel</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="24286AC8-ADD4-007E-87FB-571305B60B79" referredColumn="21A0CD50-4093-F28B-623E-7BE6C4652E7A"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="64113E8F-46B2-DDD1-4686-8D55F7621D16" name="post_PK">
+<createdBy>konra</createdBy>
+<createdTime>2021-12-12 21:19:24 UTC</createdTime>
+<generatorID>5BAAD6CC-64CC-D88F-6997-B0EA6A436451</generatorID>
+<ownerDesignName>datamodel</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="0B1CB0C4-7982-2E69-2326-6BCED220F608"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="FE4AFEA4-03B3-005E-8F43-CE040A50F111" name="post_user_FK">
+<createdBy>konra</createdBy>
+<createdTime>2021-12-12 21:19:24 UTC</createdTime>
+<generatorID>A5776E91-D6AB-5FD1-8CD9-C1C3E4D1E3FF</generatorID>
+<ownerDesignName>datamodel</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="99ED3E18-4F4F-17C9-FF03-65550D429BB8"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="EB5E83FE-89AC-F088-FADA-F5D3032CFEE9" name="post_project_FK">
+<createdBy>konra</createdBy>
+<createdTime>2021-12-12 21:19:24 UTC</createdTime>
+<generatorID>A371C57B-CB31-86AB-7A28-FC467014B264</generatorID>
+<ownerDesignName>datamodel</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="B9CA718D-2751-6DF3-D7EA-330159389554"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>
