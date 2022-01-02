@@ -31,5 +31,17 @@ class Comment(models.Model):
     auth_user_id = models.ForeignKey(User)
 
 
+class LikeProject(models.Model):
+    auth_user_id = models.ForeignKey(User)
+    project_id = models.ForeignKey(Project)
 
+
+class PostProject(models.Model):
+    auth_user_id = models.ForeignKey(User)
+    post_id = models.ForeignKey(Post)
+
+
+class LikeComment(models.Model):
+    auth_user_id = models.ForeignKey(User)
+    comment_id = models.ForeignKey(Comment)
 
