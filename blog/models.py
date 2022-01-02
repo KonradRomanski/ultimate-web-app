@@ -15,8 +15,8 @@ class Post(models.Model):
     content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    auth_user_id = models.ForeignKey(User)
-    project_id = models.ForeignKey(Project)
+    auth_user_id = models.ForeignKey(User, on_delete=models.PROTECT)
+    project_id = models.ForeignKey(Project, on_delete=models.PROTECT)
 
 
 class Stat(models.Model):
@@ -27,21 +27,21 @@ class Stat(models.Model):
 
 class Comment(models.Model):
     description = models.TextField()
-    post_id = models.ForeignKey(Post)
-    auth_user_id = models.ForeignKey(User)
+    post_id = models.ForeignKey(Post, on_delete=models.PROTECT)
+    auth_user_id = models.ForeignKey(User, on_delete=models.PROTECT)
 
 
 class LikeProject(models.Model):
-    auth_user_id = models.ForeignKey(User)
-    project_id = models.ForeignKey(Project)
+    auth_user_id = models.ForeignKey(User, on_delete=models.PROTECT)
+    project_id = models.ForeignKey(Project, on_delete=models.PROTECT)
 
 
 class PostProject(models.Model):
-    auth_user_id = models.ForeignKey(User)
-    post_id = models.ForeignKey(Post)
+    auth_user_id = models.ForeignKey(User, on_delete=models.PROTECT)
+    post_id = models.ForeignKey(Post, on_delete=models.PROTECT)
 
 
 class LikeComment(models.Model):
-    auth_user_id = models.ForeignKey(User)
-    comment_id = models.ForeignKey(Comment)
+    auth_user_id = models.ForeignKey(User, on_delete=models.PROTECT)
+    comment_id = models.ForeignKey(Comment, on_delete=models.PROTECT)
 
