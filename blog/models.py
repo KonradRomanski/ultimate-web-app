@@ -21,7 +21,7 @@ class Post(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     auth_user = models.ForeignKey(User, on_delete=models.PROTECT)
-    project = models.ForeignKey(Project, on_delete=models.PROTECT)
+    project = models.ForeignKey(Project, on_delete=models.PROTECT, blank=True)
 
 
 class Stat(models.Model):
