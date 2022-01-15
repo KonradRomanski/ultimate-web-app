@@ -38,30 +38,32 @@ class Comment(models.Model):
         db_table = 'comment'
 
     description = models.TextField()
-    post = models.ForeignKey(Post, on_delete=models.PROTECT)
-    auth_user = models.ForeignKey(User, on_delete=models.PROTECT)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    auth_user = models.ForeignKey(User, on_delete=models.CASCADE)
 
 
 class LikeProject(models.Model):
     class Meta:
         db_table = 'like_project'
+        unique_together = ('auth_user', 'project')
 
-    auth_user = models.ForeignKey(User, on_delete=models.PROTECT)
-    project = models.ForeignKey(Project, on_delete=models.PROTECT)
+    auth_user = models.ForeignKey(User, on_delete=models.CASCADE)
+    project = models.ForeignKey(Project, on_delete=models.CASCADE)
 
 
 class LikePost(models.Model):
     class Meta:
         db_table = 'like_post'
+        unique_together = ('auth_user', 'post')
 
-    auth_user = models.ForeignKey(User, on_delete=models.PROTECT)
-    post = models.ForeignKey(Post, on_delete=models.PROTECT)
+    auth_user = models.ForeignKey(User, on_delete=models.CASCADE)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
 
 
 class LikeComment(models.Model):
     class Meta:
         db_table = 'like_comment'
+        unique_together = ('auth_user', 'comment')
 
-    auth_user = models.ForeignKey(User, on_delete=models.PROTECT)
-    comment = models.ForeignKey(Comment, on_delete=models.PROTECT)
-
+    auth_user = models.ForeignKey(User, on_delete=models.CASCADE)
+    comment = models.ForeignKey(Comment, on_delete=models.CASCADE)
