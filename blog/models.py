@@ -1,10 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import User, AbstractUser
-
-
-class User(AbstractUser):
-    first_name = models.CharField(max_length=150)
-    last_name = models.CharField(max_length=150)
+from django.contrib.auth.models import User
 
 
 class Project(models.Model):
