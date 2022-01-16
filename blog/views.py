@@ -8,6 +8,7 @@ from django.http import HttpResponse
 from blog.forms import NewUserForm
 
 
+
 def index(request):
     return render(request, 'blog/index.html')
 

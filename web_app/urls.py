@@ -22,6 +22,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('blog/', include('blog.urls')),
     path("register", views.register_request, name="register"),
-    path("login", views.login_request, name="login")
+    path("login", views.login_request, name="login"),
+    path('', include('blog.urls'))
 
 ]
