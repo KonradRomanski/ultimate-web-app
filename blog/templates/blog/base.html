@@ -4,8 +4,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="Gregory, Dark Hunter" />
-    <title>Clean Blog - Start Bootstrap Theme</title>
-    <link rel="icon" type="image/x-icon" href="{% static 'blog/images/favicon.ico' %}" />
+    <title>Ultimate Developers</title>
     <!-- Font Awesome icons (free version)-->
     <script src="https://use.fontawesome.com/releases/v5.15.4/js/all.js" crossorigin="anonymous"></script>
     <!-- Google fonts-->
@@ -42,25 +41,40 @@
                     <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="index.html">Home</a></li>
                     <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="about.html">About</a></li>
                     <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="post.html">Sample Post</a></li>
-                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="contact.html">Contact</a></li>
+
+{#                    <li class="nav-item">#}
+
+{#                    </li>#}
+
+                    {% if user.is_authenticated %}
+
+                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="#">Welcome, {{user.username}}</a></li>
+                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="/logout">Logout</a></li>
+
+                    {% else %}
+
+                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="/login">Login</a></li>
+
+                    {% endif %}
                 </ul>
             </div>
         </div>
     </nav>
     <!-- Page Header-->
     {% block page-header %}
-    <header class="masthead" style="background-image: url('images/img/home-bg.jpg')">
+    <header class="masthead" style="background-image: url('static/')">
         <div class="container position-relative px-4 px-lg-5">
-            <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="row gx-2 gx-lg-5 justify-content-center">
                 <div class="col-md-10 col-lg-8 col-xl-7">
                     <div class="site-heading">
-                        <h1>{% block title %}Clean Blog{% endblock %}</h1>
+                        <h1>{% block title %}Ultimate Developers{% endblock %}</h1>
                     </div>
                 </div>
             </div>
         </div>
     </header>
     {% endblock %}
+
     {% block content %}
     <!-- Main Content-->
     <div class="container px-4 px-lg-5">
