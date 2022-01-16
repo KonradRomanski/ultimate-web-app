@@ -38,7 +38,7 @@ class Comment(models.Model):
         db_table = 'comment'
 
     description = models.TextField()
-    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    post = models.ForeignKey(Post, related_name="comments", on_delete=models.CASCADE)
     auth_user = models.ForeignKey(User, on_delete=models.CASCADE)
 
 
