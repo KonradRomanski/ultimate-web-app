@@ -19,9 +19,16 @@ from django.urls import path, include
 from blog import views
 
 urlpatterns = [
+    # admin urls
     path('admin/', admin.site.urls),
+
+    # blog urls
     path('blog/', include('blog.urls')),
+    path('', include('blog.urls')),
+
+    # authentication urls
     path("register", views.register_request, name="register"),
-    path("login", views.login_request, name="login")
+    path("login", views.login_request, name="login"),
+    path("logout", views.logout_request, name="logout"),
 
 ]
