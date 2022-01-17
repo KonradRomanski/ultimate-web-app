@@ -10,6 +10,7 @@ from .models import Post, Project, LikePost
 from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
 
+
 def index(request):
     return render(request, 'blog/index.html')
 
@@ -17,14 +18,18 @@ def index(request):
 def post(request):
     return render(request, 'blog/post.html')
 
+
 def blog(request):
     return render(request, 'blog/blog.html')
+
 
 def repositories(request):
     return render(request, 'blog/repositories.html')
 
+
 def post_comment(request):
     return
+
 
 def about(request):
     return render(request, 'blog/about.html')
@@ -66,16 +71,16 @@ def login_request(request):
     return render(request=request, template_name="blog/login.html", context={"login_form": form})
 
 
-
 class ListPosts(ListView):
     model = Post
     template_name = 'blog/blog.html'
 
 
 class ListAFewPosts(ListView):
-    queryset = Post.objects.order_by('created_at')[:1]
+    queryset = Post.objects.order_by('created_at')[:3]
     model = Post
     template_name = 'blog/index.html'
+
 
 class PostView(DetailView):
     model = Post
@@ -86,13 +91,14 @@ class ListRepos(ListView):
     model = Project
     template_name = 'blog/repositories.html'
 
+
 def LikeView(request, pk):
     post_likes = get_object_or_404(LikePost, id=request.get('post_id'))
     post_likes.auth_user.add(request.user)
     return HttpResponseRedirect(reverse('article-detail', args=[str(pk)]))
 
+
 def logout_request(request):
     logout(request)
     messages.info(request, "You have successfully logged out.")
     return redirect("/blog")
-
