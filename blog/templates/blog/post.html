@@ -8,11 +8,10 @@
                 <div class="row gx-4 gx-lg-5 justify-content-center">
                     <div class="col-md-10 col-lg-8 col-xl-7">
                         <div class="post-heading">
-                            <h1>[TITLE] Fancy title</h1>
-                            <h2 class="subheading">[AUTHOR] Created by the Ultimate Web Team</h2>
+                            <h1>{{ post.title }}</h1>
+                            <h2 class="subheading">Created by {{ post.auth_user }}</h2>
                             <span class="meta">
-                                [DATE]
-                                on January 13, 2077
+                                on {{ post.created_at}}
                             </span>
                         </div>
                     </div>
@@ -26,24 +25,7 @@
             <div class="container px-4 px-lg-5">
                 <div class="row gx-4 gx-lg-5 justify-content-center">
                     <div class="col-md-10 col-lg-8 col-xl-7">
-                        <h2>[CONTENT]</h2>
-                        <p>Never in all their history have men been able truly to conceive of the world as one: a single sphere, a globe, having the qualities of a globe, a round earth in which all the directions eventually meet, in which there is no center because every point, or none, is center — an equal earth which all men occupy as equals. The airman's earth, if free men make it, will be truly round: a globe in practice, not in theory.</p>
-                        <p>Science cuts two ways, of course; its products can be used for both good and evil. But there's no turning back from science. The early warnings about technological dangers also come from science.</p>
-                        <p>What was most significant about the lunar voyage was not that man set foot on the Moon but that they set eye on the earth.</p>
-                        <p>A Chinese tale tells of some men sent to harm a young girl who, upon seeing her beauty, become her protectors rather than her violators. That's how I felt seeing the Earth for the first time. I could not help but love and cherish her.</p>
-                        <p>For those who have seen the Earth from space, and for the hundreds and perhaps thousands more who will, the experience most certainly changes your perspective. The things that we share in our world are far more valuable than those which divide us.</p>
-                        <h2 class="section-heading">The Final Frontier</h2>
-                        <p>There can be no thought of finishing for ‘aiming for the stars.’ Both figuratively and literally, it is a task to occupy the generations. And no matter how much progress one makes, there is always the thrill of just beginning.</p>
-                        <p>There can be no thought of finishing for ‘aiming for the stars.’ Both figuratively and literally, it is a task to occupy the generations. And no matter how much progress one makes, there is always the thrill of just beginning.</p>
-                        <blockquote class="blockquote">The dreams of yesterday are the hopes of today and the reality of tomorrow. Science has not yet mastered prophecy. We predict too much for the next year and yet far too little for the next ten.</blockquote>
-                        <p>Spaceflights cannot be stopped. This is not the work of any one man or even a group of men. It is a historical process which mankind is carrying out in accordance with the natural laws of human development.</p>
-                        <h2 class="section-heading">Reaching for the Stars</h2>
-                        <p>As we got further and further away, it [the Earth] diminished in size. Finally it shrank to the size of a marble, the most beautiful you can imagine. That beautiful, warm, living object looked so fragile, so delicate, that if you touched it with a finger it would crumble and fall apart. Seeing this has to change a man.</p>
-                        <a href="#!"><img class="img-fluid" src="assets/img/post-sample-image.jpg" alt="..." /></a>
-                        <span class="caption text-muted">To go places and do things that have never been done before – that’s what living is all about.</span>
-                        <p>Space, the final frontier. These are the voyages of the Starship Enterprise. Its five-year mission: to explore strange new worlds, to seek out new life and new civilizations, to boldly go where no man has gone before.</p>
-                        <p>As I stand out here in the wonders of the unknown at Hadley, I sort of realize there’s a fundamental truth to our nature, Man must explore, and this is exploration at its greatest.</p>
-                        <p>
+                            {{ post.content }}
                             Placeholder text by
                             <a href="http://spaceipsum.com/">Space Ipsum</a>
                             &middot; Images by
@@ -55,49 +37,62 @@
         </article>
 
         <div class="container mt-5">
-    <div class="row d-flex justify-content-center">
+    <div class="d-flex justify-content-center row">
         <div class="col-md-8">
-            <div class="headings d-flex justify-content-between align-items-center mb-3">
-                <h5>Comments</h5>
-            </div>
-            <div class="card p-3">
-                <div class="d-flex justify-content-between align-items-center">
-                    <div class="user d-flex flex-row align-items-center"> <img src="https://i.imgur.com/hczKIze.jpg" width="30" class="user-img rounded-circle mr-2"> <span><small class="font-weight-bold text-primary">james_olesenn</small> <small class="font-weight-bold">Hmm, This poster looks cool</small></span> </div> <small>2 days ago</small>
+                <div class="bg-white p-2">
+                    Comments...
+                    <hr/>
+                    {% for comment in post.comments.all %}
+                    <div class="d-flex flex-row user-info">
+                        <div class="d-flex flex-column justify-content-start ml-2"><span style="color: #6c6e7e">{{ comment.auth_user }}</span></div>
+                    </div>
+                        <div class="mt-2" style="font-size: medium">
+                        {{ comment.description }}
+                        </div>
+                        <hr/>
+                    {%  endfor %}
+
                 </div>
-                <div class="action d-flex justify-content-between mt-2 align-items-center">
-                    <div class="reply px-4"> <small>Remove</small> <span class="dots"></span> <small>Reply</small> <span class="dots"></span> <small>Like</small> </div>
-                    <div class="icons align-items-center"> <i class="fa fa-star text-warning"></i> <i class="fa fa-check-circle-o check-icon"></i> </div>
+                <div class="bg-white">
+                    <div class="d-flex flex-row fs-12">
+{#                        <div class="like p-2 cursor"><i class="fa fa-commenting-o"></i><span class="ml-1">Comment</span></div>#}
+{#                        <div class="like p-2 cursor"><i class="fa fa-share"></i><span class="ml-1">Share</span></div>#}
+                    </div>
                 </div>
-            </div>
-            <div class="card p-3 mt-2">
-                <div class="d-flex justify-content-between align-items-center">
-                    <div class="user d-flex flex-row align-items-center"> <img src="https://i.imgur.com/C4egmYM.jpg" width="30" class="user-img rounded-circle mr-2"> <span><small class="font-weight-bold text-primary">olan_sams</small> <small class="font-weight-bold">Loving your work and profile! </small></span> </div> <small>3 days ago</small>
-                </div>
-                <div class="action d-flex justify-content-between mt-2 align-items-center">
-                    <div class="reply px-4"> <small>Remove</small> <span class="dots"></span> <small>Reply</small> <span class="dots"></span> <small>Like</small> </div>
-                    <div class="icons align-items-center"> <i class="fa fa-check-circle-o check-icon text-primary"></i> </div>
-                </div>
-            </div>
-            <div class="card p-3 mt-2">
-                <div class="d-flex justify-content-between align-items-center">
-                    <div class="user d-flex flex-row align-items-center"> <img src="https://i.imgur.com/0LKZQYM.jpg" width="30" class="user-img rounded-circle mr-2"> <span><small class="font-weight-bold text-primary">rashida_jones</small> <small class="font-weight-bold">Really cool Which filter are you using? </small></span> </div> <small>3 days ago</small>
-                </div>
-                <div class="action d-flex justify-content-between mt-2 align-items-center">
-                    <div class="reply px-4"> <small>Remove</small> <span class="dots"></span> <small>Reply</small> <span class="dots"></span> <small>Like</small> </div>
-                    <div class="icons align-items-center"> <i class="fa fa-user-plus text-muted"></i> <i class="fa fa-star-o text-muted"></i> <i class="fa fa-check-circle-o check-icon text-primary"></i> </div>
-                </div>
-            </div>
-            <div class="card p-3 mt-2">
-                <div class="d-flex justify-content-between align-items-center">
-                    <div class="user d-flex flex-row align-items-center"> <img src="https://i.imgur.com/ZSkeqnd.jpg" width="30" class="user-img rounded-circle mr-2"> <span><small class="font-weight-bold text-primary">simona_rnasi</small> <small class="font-weight-bold text-primary">@macky_lones</small> <small class="font-weight-bold text-primary">@rashida_jones</small> <small class="font-weight-bold">Thanks </small></span> </div> <small>3 days ago</small>
-                </div>
-                <div class="action d-flex justify-content-between mt-2 align-items-center">
-                    <div class="reply px-4"> <small>Remove</small> <span class="dots"></span> <small>Reply</small> <span class="dots"></span> <small>Like</small> </div>
-                    <div class="icons align-items-center"> <i class="fa fa-check-circle-o check-icon text-primary"></i> </div>
+                <div class="bg-light p-2">
+                    <div class="d-flex flex-row align-items-start">
+                        <form class="form-comment-control" action = '/add_comment' method = 'post'>
+                            {% csrf_token %}
+                            {{ form }}
+                            <textarea class="form-control ml-1 shadow-none textarea" placeholder="Write comment here" type="text" value = 'new_comment'></textarea>
+                            <button style="margin-top: 1em; padding: 1em;" class="btn btn-primary btn-sm shadow-none" type="button">Post comment</button>
+
+                        </form>
+                    </div>
+
+{#                         <div class="card-body">#}
+{#                {% if new_comment %}#}
+{#                <div class="alert alert-success" role="alert">#}
+{#                  Your comment is awaiting moderation#}
+{#                </div>#}
+{#                {% else %}#}
+{#                <h3>Leave a comment</h3>#}
+{#                <form method="post" style="margin-top: 1.3em;">#}
+{#                  {{ comment_form.as_p }}#}
+{#                  {% csrf_token %}#}
+{#                  <button type="submit" class="btn btn-primary  btn-lg">Submit</button>#}
+{#                </form> #}
+{#                {% endif %}#}
+{#              </div>#}
+
+{#                    <div class="mt-2 text-right">#}
+{#                        <button class="btn btn-outline-primary btn-sm ml-1 shadow-none" type="button">Cancel</button>#}
+{#                    </div>#}
                 </div>
             </div>
         </div>
     </div>
+</div>
 </div>
 
         {% endblock %}

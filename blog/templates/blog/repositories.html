@@ -1,24 +1,28 @@
 <html lang="en">
     <div class="basic">
     {% extends "./base.html" %}
-        {% block title %} Welcome Home! {% endblock %}
+        {% block title %} Base blog site {% endblock %}
         {% block back-button %} {% endblock %}
-        {% block content %}
+
+    {% block content %}
             <div class="container px-4 px-lg-5">
         <div class="row gx-4 gx-lg-5 justify-content-center">
             <div class="col-md-10 col-lg-8 col-xl-7">
                 <!-- Post preview-->
-                {% for post in object_list %}
+                {% for project in object_list %}
                     <div class="post-preview">
-                        <a href="{% url 'post' post.pk %}">
-                            <h2 class="post-title">{{ post.title }}</h2>
-                            <h3 class="post-subtitle">Click to find out more!</h3>
-                        </a>
+{#                        <a href="{% url 'post' project.pk %}">#}
+                            <h2 class="post-title">{{ project.name }}</h2>
+                            <h3 class="post-meta">{{ project.description }}!</h3>
+{#                        </a>#}
                         <p class="post-meta">
                             Posted by
-                            <a href="#!">{{ post.auth_user }}</a>
-                            on {{ post.created_at }}
+                            <a href="#!">{{ project.auth_user }}</a>
+                            on {{ project.created_at }}
                         </p>
+                    <a href = {{ project.github_link }}>
+                        GitHub link
+                    </a>
                     </div>
 
                     <!-- Divider-->
