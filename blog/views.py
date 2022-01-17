@@ -1,5 +1,5 @@
 from django.contrib import messages
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.forms import AuthenticationForm
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
@@ -66,6 +66,7 @@ def login_request(request):
     return render(request=request, template_name="blog/login.html", context={"login_form": form})
 
 
+
 class ListPosts(ListView):
     model = Post
     template_name = 'blog/blog.html'
@@ -89,3 +90,9 @@ def LikeView(request, pk):
     post_likes = get_object_or_404(LikePost, id=request.get('post_id'))
     post_likes.auth_user.add(request.user)
     return HttpResponseRedirect(reverse('article-detail', args=[str(pk)]))
+
+def logout_request(request):
+    logout(request)
+    messages.info(request, "You have successfully logged out.")
+    return redirect("/blog")
+
