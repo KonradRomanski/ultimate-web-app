@@ -21,8 +21,13 @@
                             on {{ project.created_at }}
                         </p>
                     <a href = {{ project.github_link }}>
-                        <button class="btn btn-primary"> Repozytorium </button>
+                        <button class="btn btn-primary"> Repository </button>
                     </a>
+                        {% if project.post %}
+                        <a href = {{ project.github_link }}>
+                            <button class="btn btn-primary"> Debate </button>
+                        </a>
+                        {% endif %}
                     </div>
 
                     <!-- Divider-->

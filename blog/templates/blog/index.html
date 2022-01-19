@@ -11,6 +11,7 @@
                 <div class="site-heading"> <h1>Recent posts</h1> </div>
 
                 <!-- Post preview-->
+            {% if object_list %}
                 {% for post in object_list %}
                     <div class="post-preview">
                         <a href="{% url 'post' post.pk %}">
@@ -27,7 +28,7 @@
                     <!-- Divider-->
                     <hr class="my-4" />
                 {% endfor %}
-
+            {% endif %}
             </div>
         </div>
     </div>

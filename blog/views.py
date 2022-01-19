@@ -123,9 +123,6 @@ def logout_request(request):
 
 @login_required
 def PostDetail(request, pk):
-    print(pk)
-    if pk == -1:
-        pk = request.post_id
     post = get_object_or_404(Post, id=pk)
     user = get_user(request)
     comments = Comment.objects.filter(post_id=post.id)
