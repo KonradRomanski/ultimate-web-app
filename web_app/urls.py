@@ -23,7 +23,7 @@ from web_app import settings
 
 urlpatterns = [
     # admin urls
-    path('admin', admin.site.urls),
+    path('admin/', admin.site.urls),
 
     # blog urls
     path('blog', include('blog.urls')),
