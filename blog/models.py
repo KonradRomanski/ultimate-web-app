@@ -34,12 +34,16 @@ class Stat(models.Model):
 
 
 class Comment(models.Model):
+    description = models.TextField()
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    auth_user = models.ForeignKey(User, on_delete=models.CASCADE)
+
     class Meta:
         db_table = 'comment'
+        ordering = ['-id']
 
-    description = models.TextField()
-    post = models.ForeignKey(Post, related_name="comments", on_delete=models.CASCADE)
-    auth_user = models.ForeignKey(User, on_delete=models.CASCADE)
+    def __str__(self):
+        return 'Comment {} by {}'.format(self.description, self.auth_user.username)
 
 
 class LikeProject(models.Model):
