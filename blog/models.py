@@ -11,6 +11,7 @@ class Post(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     auth_user = models.ForeignKey(User, on_delete=models.PROTECT)
+    # likes = models.ManyToManyField(settings.AUTH)
 
 
 class Project(models.Model):
