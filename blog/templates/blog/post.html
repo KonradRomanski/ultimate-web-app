@@ -1,100 +1,78 @@
-<html lang="en">
-    <div class="basic">
-    {% extends "./base.html" %}
-        {% block page-header %}
-            <header class="masthead">
+  {% extends "./base.html" %}
+    {% block page-header %}
+      <header class="masthead">
 
-            <div class="container position-relative px-4 px-lg-5">
-                <div class="row gx-4 gx-lg-5 justify-content-center">
-                    <div class="col-md-10 col-lg-8 col-xl-7">
-                        <div class="post-heading">
-                            <h1>{{ post.title }}</h1>
-                            <h2 class="subheading">Created by {{ post.auth_user }}</h2>
-                            <span class="meta">
-                                on {{ post.created_at}}
-                            </span>
-                        </div>
-                    </div>
-                </div>
+      <div class="container position-relative px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+          <div class="col-md-10 col-lg-8 col-xl-7">
+            <div class="post-heading">
+              <h1>{{ post.title }}</h1>
+              <h2 class="subheading">Created by {{ post.auth_user }}</h2>
+              <span class="meta">
+                on {{ post.created_at}}
+              </span>
             </div>
-        </header>
-        {% endblock %}
-        {% block title %} POST {% endblock %}
-        {% block content %}
-        <article class="mb-4">
-            <div class="container px-4 px-lg-5">
-                <div class="row gx-4 gx-lg-5 justify-content-center">
-                    <div class="col-md-10 col-lg-8 col-xl-7">
-                            {{ post.content }}
-                            Placeholder text by
-                            <a href="http://spaceipsum.com/">Space Ipsum</a>
-                            &middot; Images by
-                            <a href="https://www.flickr.com/photos/nasacommons/">NASA on The Commons</a>
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </article>
-
-        <div class="container mt-5">
-    <div class="d-flex justify-content-center row">
-        <div class="col-md-8">
-                <div class="bg-white p-2">
-                    Comments...
-                    <hr/>
-                    {% for comment in post.comments.all %}
-                    <div class="d-flex flex-row user-info">
-                        <div class="d-flex flex-column justify-content-start ml-2"><span style="color: #6c6e7e">{{ comment.auth_user }}</span></div>
-                    </div>
-                        <div class="mt-2" style="font-size: medium">
-                        {{ comment.description }}
-                        </div>
-                        <hr/>
-                    {%  endfor %}
-
-                </div>
-                <div class="bg-white">
-                    <div class="d-flex flex-row fs-12">
-{#                        <div class="like p-2 cursor"><i class="fa fa-commenting-o"></i><span class="ml-1">Comment</span></div>#}
-{#                        <div class="like p-2 cursor"><i class="fa fa-share"></i><span class="ml-1">Share</span></div>#}
-                    </div>
-                </div>
-                <div class="bg-light p-2">
-                    <div class="d-flex flex-row align-items-start">
-                        <form class="form-comment-control" action = '/add_comment' method = 'post'>
-                            {% csrf_token %}
-                            {{ form }}
-                            <textarea class="form-control ml-1 shadow-none textarea" placeholder="Write comment here" type="text" value = 'new_comment'></textarea>
-                            <button style="margin-top: 1em; padding: 1em;" class="btn btn-primary btn-sm shadow-none" type="button">Post comment</button>
-
-                        </form>
-                    </div>
-
-{#                         <div class="card-body">#}
-{#                {% if new_comment %}#}
-{#                <div class="alert alert-success" role="alert">#}
-{#                  Your comment is awaiting moderation#}
-{#                </div>#}
-{#                {% else %}#}
-{#                <h3>Leave a comment</h3>#}
-{#                <form method="post" style="margin-top: 1.3em;">#}
-{#                  {{ comment_form.as_p }}#}
-{#                  {% csrf_token %}#}
-{#                  <button type="submit" class="btn btn-primary  btn-lg">Submit</button>#}
-{#                </form> #}
-{#                {% endif %}#}
-{#              </div>#}
-
-{#                    <div class="mt-2 text-right">#}
-{#                        <button class="btn btn-outline-primary btn-sm ml-1 shadow-none" type="button">Cancel</button>#}
-{#                    </div>#}
-                </div>
-            </div>
+          </div>
         </div>
+      </div>
+    </header>
+    {% endblock %}
+    {% block title %} POST {% endblock %}
+    {% block content %}
+        {% load crispy_forms_tags %}
+    <article class="mb-4">
+      <div class="container px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+          <div class="col-md-10 col-lg-8 col-xl-7">
+            <p>
+              {{ post.content }}
+            </p>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <div class="container mt-5">
+  <div class="d-flex justify-content-center row">
+    <div class="col-md-8">
+        <div class="bg-white p-2">
+          Comments...
+          <hr/>
+          {% for comment in comments %}
+          <div class="d-flex flex-row user-info">
+            <div class="d-flex flex-column justify-content-start ml-2"><span style="color: #6c6e7e">{{ comment.auth_user.username }}</span></div>
+          </div>
+            <div class="mt-2" style="font-size: medium">
+            {{ comment.description}}
+            </div>
+            <hr/>
+          {%  endfor %}
+
+        </div>
+        <div class="bg-white">
+          <div class="d-flex flex-row fs-12">
+{#            <div class="like p-2 cursor"><i class="fa fa-commenting-o"></i><span class="ml-1">Comment</span></div>#}
+{#            <div class="like p-2 cursor"><i class="fa fa-share"></i><span class="ml-1">Share</span></div>#}
+          </div>
+        </div>
+        <div class="bg-light p-2">
+          <div class="d-flex flex-row align-items-start">
+{#            <form class="form-comment-control" action = '/add_comment' method = 'post'>#}
+            <form method="POST" action="./{{ request.post_id }}">
+                {% if user.is_authenticated %}
+                  {% csrf_token %}
+                  {{ comment_form.description|as_crispy_field }}
+                    <button class="btn btn-primary ml-2" type="submit">Reply</button>
+                {% else %}
+                <button class="btn btn-primary"> <a href="/login">Login to leave a comment</a></button>
+                {% endif %}
+            </form>
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
 </div>
 </div>
 
-        {% endblock %}
-    </div>
-</html>
+    {% endblock %}

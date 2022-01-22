@@ -1,9 +1,12 @@
 from django.urls import path
-from .views import ListPosts, ListAFewPosts, PostView, ListRepos, LikeView
+from .views import ListPosts, ListAFewPosts, PostView, ListRepos, LikeView, PostDetail
 from . import views
 
 urlpatterns = [
-    path('post/<int:pk>', PostView.as_view(), name='post'),
+    # path('post/<int:pk>', PostView.as_view(), name='post'),
+
+    path('post/<int:pk>', PostDetail, name='post'),
+    path('post', PostDetail, name='post'),
 
     path('about', views.about, name='about'),
 
@@ -12,8 +15,6 @@ urlpatterns = [
     path('blog', ListPosts.as_view(), name='blog'),
 
     path('repositories', ListRepos.as_view(), name='repositories'),
-
-    path('index', ListAFewPosts.as_view(), name='index'),
 
     path('like/<int:pk>', LikeView, name='like_post'),
 

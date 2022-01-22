@@ -1,7 +1,7 @@
 <html lang="en">
     <div class="basic">
     {% extends "./base.html" %}
-        {% block title %} Base blog site {% endblock %}
+        {% block title %} Our best projects {% endblock %}
         {% block back-button %} {% endblock %}
 
     {% block content %}
@@ -21,14 +21,18 @@
                             on {{ project.created_at }}
                         </p>
                     <a href = {{ project.github_link }}>
-                        GitHub link
+                        <button class="btn btn-primary"> Repository </button>
                     </a>
+                        {% if project.post %}
+                        <a href = {{ project.github_link }}>
+                            <button class="btn btn-primary"> Debate </button>
+                        </a>
+                        {% endif %}
                     </div>
 
                     <!-- Divider-->
                     <hr class="my-4" />
                 {% endfor %}
-
             </div>
         </div>
     </div>

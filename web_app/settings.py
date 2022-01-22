@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-g-+=u4$#qtm^2jrc1o0x2lt7v=l(6&8k(fs%e$nn0cek^r94o%
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['192.168.1.18', '127.0.0.1']
 
 
 # Application definition
@@ -81,8 +81,8 @@ DATABASES = {
     'default': {
         'ENGINE'  : 'django.db.backends.mysql',
         'NAME'    : 'ultimate_web_app',
-        'USER'    : 'root',
-        'PASSWORD': 'admin',
+        'USER'    : 'django',
+        'PASSWORD': 'django_db_pwd',
         'HOST'    : 'localhost',
         'PORT'    : '3306',
     }
@@ -129,6 +129,8 @@ STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
+    os.path.join(BASE_DIR, 'blog/static'),
+
 ]
 
 # Default primary key field type
