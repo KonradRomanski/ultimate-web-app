@@ -1,0 +1,41 @@
+<html lang="en">
+    <div class="basic">
+    {% extends "./base.html" %}
+        {% block title %} Our best projects {% endblock %}
+        {% block back-button %} {% endblock %}
+
+    {% block content %}
+            <div class="container px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <!-- Post preview-->
+                {% for project in object_list %}
+                    <div class="post-preview">
+{#                        <a href="{% url 'post' project.pk %}">#}
+                            <h2 class="post-title">{{ project.name }}</h2>
+                            <h3 class="post-meta">{{ project.description }}!</h3>
+{#                        </a>#}
+                        <p class="post-meta">
+                            Posted by
+                            <a href="#!">{{ project.auth_user }}</a>
+                            on {{ project.created_at }}
+                        </p>
+                    <a href = {{ project.github_link }}>
+                        <button class="btn btn-primary"> Repository </button>
+                    </a>
+                        {% if project.post %}
+                        <a href = {{ project.github_link }}>
+                            <button class="btn btn-primary"> Debate </button>
+                        </a>
+                        {% endif %}
+                    </div>
+
+                    <!-- Divider-->
+                    <hr class="my-4" />
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    {% endblock %}
+    </div>
+</html>

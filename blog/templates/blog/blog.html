@@ -1,17 +1,14 @@
 <html lang="en">
     <div class="basic">
     {% extends "./base.html" %}
-        {% block title %} Welcome Home! {% endblock %}
+        {% block title %} Blog {% endblock %}
         {% block back-button %} {% endblock %}
-        {% block content %}
+
+    {% block content %}
             <div class="container px-4 px-lg-5">
         <div class="row gx-4 gx-lg-5 justify-content-center">
             <div class="col-md-10 col-lg-8 col-xl-7">
-
-                <div class="site-heading"> <h1>Recent posts</h1> </div>
-
                 <!-- Post preview-->
-            {% if object_list %}
                 {% for post in object_list %}
                     <div class="post-preview">
                         <a href="{% url 'post' post.pk %}">
@@ -28,7 +25,7 @@
                     <!-- Divider-->
                     <hr class="my-4" />
                 {% endfor %}
-            {% endif %}
+
             </div>
         </div>
     </div>
