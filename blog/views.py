@@ -36,10 +36,6 @@ def about(request):
     return render(request, 'blog/about.html')
 
 
-def contact(request):
-    return render(request, 'blog/contact.html')
-
-
 def register_request(request):
     if request.method == "POST":
         form = NewUserForm(request.POST)
@@ -47,7 +43,7 @@ def register_request(request):
             user = form.save()
             login(request, user)
             messages.success(request, "Registration successful.")
-            return redirect("/blog")
+            return redirect("/")
         messages.error(request, "Unsuccessful registration. Invalid information.")
     form = NewUserForm()
     return render(request=request, template_name="blog/register.html", context={"register_form": form})
@@ -63,7 +59,7 @@ def login_request(request):
             if user is not None:
                 login(request, user)
                 messages.info(request, f"You are now logged in as {username}.")
-                return redirect("blog/")
+                return redirect("/")
             else:
                 messages.error(request, "Invalid username or password.")
         else:
@@ -72,8 +68,15 @@ def login_request(request):
     return render(request=request, template_name="blog/login.html", context={"login_form": form})
 
 
+def logout_request(request):
+    logout(request)
+    messages.info(request, "You have successfully logged out.")
+    return redirect("/")
+
+
 class ListPosts(ListView):
-    model = Post.objects.all()
+    queryset = Post.objects.order_by('created_at')
+    model = Post
     template_name = 'blog/blog.html'
 
 
@@ -115,12 +118,6 @@ def LikeView(request, pk):
     return HttpResponseRedirect(reverse('article-detail', args=[str(pk)]))
 
 
-def logout_request(request):
-    logout(request)
-    messages.info(request, "You have successfully logged out.")
-    return redirect("/blog")
-
-
 @login_required
 def PostDetail(request, pk):
     post = get_object_or_404(Post, id=pk)
@@ -141,3 +138,4 @@ def PostDetail(request, pk):
         comment_form = CommentForm()
 
     return render(request, 'blog/post.html', {'post': post, 'comments': comments, 'comment_form': comment_form})
+
