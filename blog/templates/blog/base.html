@@ -46,8 +46,6 @@
                     <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="/blog">Blog</a></li>
                     <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="/about">About</a></li>
                     <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="/repositories">Repositories</a></li>
-                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="/contact">Contact</a></li>
-                  
                     {% if user.is_authenticated %}
                     <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="#">Welcome, {{user.username}}</a></li>
                     <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="/logout">Logout</a></li>
@@ -74,8 +72,21 @@
     </header>
     {% endblock %}
 
-    {% block content %}
-    {% endblock %}
+        <div class="container px-4 px-lg-5">
+            <div class="row gx-4 gx-lg-5 justify-content-center">
+                <div class="col-md-10 col-lg-8 col-xl-7">
+                    {% if messages %}
+                        <div class="messages">
+                            {% for message in messages %}
+                            <div{% if message.tags %} class="{{ message.tags }} p-2"{% endif %}>{{ message }}</div>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% block content %}
+        {% endblock %}
     <!-- Footer-->
     <footer class="border-top">
         <div class="container px-4 px-lg-5">

@@ -27,7 +27,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 
     # blog urls
-    path('blog', include('blog.urls')),
+    # path('blog', include('blog.urls')),
     path('', include('blog.urls')),
 
     # authentication urls
