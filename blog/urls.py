@@ -10,8 +10,6 @@ urlpatterns = [
 
     path('about', views.about, name='about'),
 
-    path('contact', views.contact, name='contact'),
-
     path('blog', ListPosts.as_view(), name='blog'),
 
     path('repositories', ListRepos.as_view(), name='repositories'),
