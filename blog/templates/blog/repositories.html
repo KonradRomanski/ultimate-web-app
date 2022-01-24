@@ -27,6 +27,19 @@
                         <a href = "/post/{{ project.post.id }}">
                             <button class="btn btn-primary"> Debate </button>
                         </a>
+
+        <div class="bg-light p-2">
+          <div class="d-flex flex-row align-items-start">
+            <form method="POST" action='./{{ request.project_id }}/like'>
+                {% if user.is_authenticated %}
+                  {% csrf_token %}
+                    <button class="btn btn-sm btn-primary ml-2" type="submit">👍 Like ({{  project.get_likes }})</button>
+                {% else %}
+                <button class="btn btn-primary"> <a href="/login">Login to like a project</a></button>
+                {% endif %}
+            </form>
+          </div>
+        </div>
                         {% endif %}
                     </div>
 

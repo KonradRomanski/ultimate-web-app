@@ -7,7 +7,7 @@ from django.http import HttpResponse
 from django.views.generic import ListView, DetailView
 # Create your views here.
 from blog.forms import NewUserForm, CommentForm
-from .models import Post, Project, LikePost, Comment
+from .models import Post, Project, LikePost, Comment, LikeProject, LikeComment
 from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy, reverse
 
@@ -112,10 +112,10 @@ class ListRepos(ListView):
     template_name = 'blog/repositories.html'
 
 
-def LikeView(request, pk):
-    post_likes = get_object_or_404(LikePost, id=request.get('post_id'))
-    post_likes.auth_user.add(request.user)
-    return HttpResponseRedirect(reverse('article-detail', args=[str(pk)]))
+# def LikeView(request, pk):
+#     post_likes = get_object_or_404(LikePost, id=request.get('post_id'))
+#     post_likes.auth_user.add(request.user)
+#     return HttpResponseRedirect(reverse('article-detail', args=[str(pk)]))
 
 
 @login_required
@@ -138,4 +138,49 @@ def PostDetail(request, pk):
         comment_form = CommentForm()
 
     return render(request, 'blog/post.html', {'post': post, 'comments': comments, 'comment_form': comment_form})
+
+@login_required
+def LikeThisPost(request, pk):
+    post = get_object_or_404(Post, id=pk)
+    user = get_user(request)
+    post_liked = LikePost.objects.filter(post_id=post.id, auth_user_id=get_user(request).id)
+    request.post_id = pk
+    if request.method == 'POST':
+        if not post_liked:
+            new_like = LikePost()
+            new_like.post_id = post.id
+            new_like.auth_user_id = user.id
+            new_like.save()
+    return redirect(f'../{pk}')
+
+
+@login_required
+def LikeThisComment(request, pk, cpk):
+    print(f"[CHECK] {pk} {cpk}")
+    comment = get_object_or_404(Comment, id=cpk)
+    user = get_user(request)
+    comment_liked = LikeComment.objects.filter(comment_id=comment.id, auth_user_id=get_user(request).id)
+    request.comment_id = cpk
+    if request.method == 'GET':
+        if not comment_liked:
+            print("[GO]")
+            new_like = LikeComment()
+            new_like.comment_id = comment.id
+            new_like.auth_user_id = user.id
+            new_like.save()
+    return redirect(f'../../{pk}')
+
+@login_required
+def LikeThisProject(request, pk):
+    project = get_object_or_404(Project, id=pk)
+    user = get_user(request)
+    project_liked = LikeProject.objects.filter(project_id=project.id, auth_user_id=get_user(request).id)
+    request.project_id = pk
+    if request.method == 'POST':
+        if not project_liked:
+            new_like = LikeProject()
+            new_like.project_id = project.id
+            new_like.auth_user_id = user.id
+            new_like.save()
+    return redirect(f'../{pk}')
 
