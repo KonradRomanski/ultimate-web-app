@@ -122,6 +122,9 @@ def PostDetail(request, pk):
     comments = Comment.objects.filter(post_id=post.id)
     request.post_id = pk
     post.liked = 1 if LikePost.objects.filter(post_id=post.id, auth_user_id=get_user(request).id) else 0
+    for c in comments:
+        c.liked = 1 if LikeComment.objects.filter(comment_id=c.id, auth_user_id=get_user(request).id) else 0
+
     if request.method == 'POST':
         comment_form = CommentForm(data=request.POST)
         if comment_form.is_valid():
@@ -136,6 +139,30 @@ def PostDetail(request, pk):
         comment_form = CommentForm()
 
     return render(request, 'blog/post.html', {'post': post, 'comments': comments, 'comment_form': comment_form})
+
+@login_required
+def ProjectDetail(request, pk):
+    project = get_object_or_404(Project, id=pk)
+    user = get_user(request)
+    comments = Comment.objects.filter(pk=project.id)
+    request.project_id = pk
+    project.liked = 1 if LikeProject.objects.filter(project_id=pk, auth_user_id=get_user(request).id) else 0
+
+    if request.method == 'POST':
+        comment_form = CommentForm(data=request.POST)
+        if comment_form.is_valid():
+            new_comment = comment_form.save(commit=False)
+            new_comment.project_id = project.id
+            new_comment.auth_user_id = user.id
+            new_comment.save()
+            return redirect(f'./{pk}')
+        else:
+            print(comment_form.errors)
+    else:
+        comment_form = CommentForm()
+
+    return render(request, 'blog/project.html', {'project': project, 'comments': comments, 'comment_form': comment_form})
+
 
 
 @login_required
@@ -169,6 +196,8 @@ def LikeThisComment(request, pk, cpk):
             new_like.comment_id = comment.id
             new_like.auth_user_id = user.id
             new_like.save()
+        else:
+            comment_liked.delete()
     return redirect(f'../../{pk}')
 
 @login_required
@@ -183,5 +212,7 @@ def LikeThisProject(request, pk):
             new_like.project_id = project.id
             new_like.auth_user_id = user.id
             new_like.save()
-    return redirect(f'repositories')
+        else:
+            project_liked.delete()
+    return redirect(f'../{pk}')
 

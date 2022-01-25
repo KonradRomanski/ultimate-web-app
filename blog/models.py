@@ -37,7 +37,7 @@ class Project(models.Model):
         args = (self.id, 0)
         cursor = connection.cursor()
         cursor.callproc('count_project_likes', args)
-        cursor.execute('SELECT @count_project_likes_1')
+        cursor.execute('SELECT @_count_project_likes_1')
         return cursor.fetchone()[0]
 
 

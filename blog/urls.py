@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import LikeThisComment, LikeThisProject, ListPosts, ListAFewPosts, PostView, ListRepos, PostDetail, LikeThisPost
+from .views import ProjectDetail, LikeThisComment, LikeThisProject, ListPosts, ListAFewPosts, PostView, ListRepos, PostDetail, LikeThisPost
 from . import views
 
 urlpatterns = [
@@ -19,6 +19,10 @@ urlpatterns = [
 
 
     path('repositories', ListRepos.as_view(), name='repositories'),
+
+    path('project/<int:pk>', ProjectDetail, name='post'),
+
+    path('project/<int:pk>/like', LikeThisProject, name='post'),
 
     # path('like/<int:pk>', LikeView, name='like_post'),
 

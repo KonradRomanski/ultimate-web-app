@@ -11,43 +11,20 @@
                 <!-- Post preview-->
                 {% for project in object_list %}
                     <div class="post-preview">
-{#                        <a href="{% url 'post' project.pk %}">#}
+                        <a href="{% url 'post' project.pk %}">
                             <h2 class="post-title">{{ project.name }}</h2>
                             <h3 class="post-meta">{{ project.description }}!</h3>
-{#                        </a>#}
+                        </a>
                         <p class="post-meta">
                             Posted by
                             <a href="#!">{{ project.auth_user }}</a>
                             on {{ project.created_at }}
                         </p>
-                    <a href = {{ project.github_link }}>
-                        <button class="btn btn-primary"> Repository </button>
-                    </a>
                     {% if project.post %}
                         <a href = "/post/{{ project.post.id }}">
                             <button class="btn btn-primary"> Debate </button>
                         </a>
                     {% endif %}
-
-                        <div class="bg-light p-2">
-                          <div class="d-flex flex-row align-items-start">
-                              <form method="POST" action='repositories/{{ project.id }}/like'>
-                                {% if user.is_authenticated %}
-                                  {% csrf_token %}
-                                    <button class="btn btn-sm btn-primary ml-2" type="submit">
-                                        {% if project.liked %}
-                                            👍 Unlike
-                                        {% else %}
-                                            👍 Like
-                                        {% endif %}
-                                        ({{  project.get_likes }})
-                                    </button>
-                                {% else %}
-                                <button class="btn btn-primary"> <a href="/login">Login to like a post</a></button>
-                                {% endif %}
-                              </form>
-                          </div>
-                        </div>
                     </div>
 
                     <!-- Divider-->

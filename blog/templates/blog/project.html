@@ -1,0 +1,60 @@
+  {% extends "./base.html" %}
+    {% block page-header %}
+      <header class="masthead">
+
+      <div class="container position-relative px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+          <div class="col-md-10 col-lg-8 col-xl-7">
+            <div class="post-heading">
+              <h1>{{ project.name }}</h1>
+              <h2 class="subheading">Created at {{ project.created_at }}</h2>
+              <span class="meta">
+                Updated at {{ project.updated_at}}
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    {% endblock %}
+    {% block title %} POST {% endblock %}
+    {% block content %}
+        {% load crispy_forms_tags %}
+    <article class="mb-4">
+      <div class="container px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+          <div class="col-md-10 col-lg-8 col-xl-7">
+            <p>
+              {{ project.description }}
+                <br/>
+                <br/>
+                <a href = {{ project.github_link }}>
+                    <button class="btn btn-primary"> Repository </button>
+                </a>
+              <form method="POST" action='./{{ request.project_id }}/like'>
+                {% if user.is_authenticated %}
+                  {% csrf_token %}
+
+                    <button class="btn btn-sm btn-primary ml-2" type="submit">
+                        {% if project.liked %}
+                            👍 Unlike
+                        {% else %}
+                            👍 Like
+                        {% endif %}
+                        ({{  project.get_likes }})
+                    </button>
+                {% else %}
+                <button class="btn btn-primary"> <a href="/login">Login to like a project</a></button>
+                {% endif %}
+            </form>
+            </p>
+          </div>
+        </div>
+      </div>
+    </article>
+
+  </div>
+</div>
+</div>
+
+    {% endblock %}
