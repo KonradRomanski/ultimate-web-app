@@ -4,9 +4,12 @@ from django.contrib.admin.models import LogEntry
 
 
 class PostAdmin(admin.ModelAdmin):
-    list_display = ['id', 'title', 'content', 'created_at', 'auth_user_id']
-    list_filter = ['title', 'content', 'created_at', 'auth_user_id']
-    search_fields = ['id', 'title', 'content', 'created_at', 'auth_user_id__username']
+    list_display = ['id', 'title', 'created_at', 'username']
+    list_filter = ['title', 'created_at', 'auth_user_id']
+    search_fields = ['id', 'title', 'created_at', 'auth_user_id__username']
+
+    def username(self, obj):
+        return obj.auth_user.username
 
 
 class ProjectAdmin(admin.ModelAdmin):

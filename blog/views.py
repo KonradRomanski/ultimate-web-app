@@ -120,6 +120,8 @@ def PostDetail(request, pk):
     post = get_object_or_404(Post, id=pk)
     user = get_user(request)
     comments = Comment.objects.filter(post_id=post.id)
+    for com in comments:
+        com.liked = 1 if LikePost.objects.filter(post_id=post.id, auth_user_id=get_user(request).id) else 0
     request.post_id = pk
     post.liked = 1 if LikePost.objects.filter(post_id=post.id, auth_user_id=get_user(request).id) else 0
     if request.method == 'POST':
