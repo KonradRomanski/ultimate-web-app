@@ -4,6 +4,7 @@ from . import views
 
 urlpatterns = [
     # path('post/<int:pk>', PostView.as_view(), name='post'),
+    path('blog/', ListPosts.as_view(), name='blog'),
 
     path('post/<int:pk>', PostDetail, name='post'),
     # path('post', PostDetail, name='post'),
@@ -14,9 +15,8 @@ urlpatterns = [
 
     path('repositories/<int:pk>/like', LikeThisProject, name='post'),
 
-    path('about', views.about, name='about'),
+    path('about/', views.about, name='about'),
 
-    path('blog', ListPosts.as_view(), name='blog'),
 
     path('repositories', ListRepos.as_view(), name='repositories'),
 

@@ -41,15 +41,6 @@ class Project(models.Model):
         return cursor.fetchone()[0]
 
 
-class Stat(models.Model):
-    class Meta:
-        db_table = 'stat'
-
-    action_name = models.CharField(max_length=100, primary_key=True)
-    number = models.IntegerField()
-    last_action = models.DateTimeField()
-
-
 class Comment(models.Model):
     description = models.TextField()
     post = models.ForeignKey(Post, on_delete=models.CASCADE)

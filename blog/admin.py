@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Post, Project, Stat, Comment
+from .models import Post, Project, Comment
 from django.contrib.admin.models import LogEntry
 
 
@@ -29,6 +29,5 @@ class Logging(admin.ModelAdmin):
 # Register your models here.
 admin.site.register(Post, PostAdmin)
 admin.site.register(Project, ProjectAdmin)
-admin.site.register(Stat)
 admin.site.register(Comment, CommentAdmin)
 admin.site.register(LogEntry, Logging)
