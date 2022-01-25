@@ -11,7 +11,7 @@
                 <!-- Post preview-->
                 {% for post in object_list %}
                     <div class="post-preview">
-                        <a href="{% url 'post' post.pk %}">
+                        <a href="/post/{{ post.pk }}">
                             <h2 class="post-title">{{ post.title }}</h2>
                             <h3 class="post-subtitle">Click to find out more!</h3>
                         </a>

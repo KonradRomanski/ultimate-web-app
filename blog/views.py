@@ -3,13 +3,9 @@ from django.contrib.auth import login, authenticate, logout, get_user
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
 from django.shortcuts import render, redirect, get_object_or_404
-from django.http import HttpResponse
 from django.views.generic import ListView, DetailView
-# Create your views here.
 from blog.forms import NewUserForm, CommentForm
-from .models import Post, Project, LikePost, Comment
-from django.http import HttpResponseRedirect
-from django.urls import reverse_lazy, reverse
+from .models import Post, Project, LikePost, Comment, LikeProject, LikeComment
 
 
 def index(request):
@@ -86,6 +82,7 @@ class ListAFewPosts(ListView):
     template_name = 'blog/index.html'
 
 
+@login_required()
 class PostView(DetailView):
     model = Post
     template_name = 'blog/post.html'
@@ -112,10 +109,10 @@ class ListRepos(ListView):
     template_name = 'blog/repositories.html'
 
 
-def LikeView(request, pk):
-    post_likes = get_object_or_404(LikePost, id=request.get('post_id'))
-    post_likes.auth_user.add(request.user)
-    return HttpResponseRedirect(reverse('article-detail', args=[str(pk)]))
+# def LikeView(request, pk):
+#     post_likes = get_object_or_404(LikePost, id=request.get('post_id'))
+#     post_likes.auth_user.add(request.user)
+#     return HttpResponseRedirect(reverse('article-detail', args=[str(pk)]))
 
 
 @login_required
@@ -124,6 +121,7 @@ def PostDetail(request, pk):
     user = get_user(request)
     comments = Comment.objects.filter(post_id=post.id)
     request.post_id = pk
+    post.liked = 1 if LikePost.objects.filter(post_id=post.id, auth_user_id=get_user(request).id) else 0
     if request.method == 'POST':
         comment_form = CommentForm(data=request.POST)
         if comment_form.is_valid():
@@ -138,4 +136,52 @@ def PostDetail(request, pk):
         comment_form = CommentForm()
 
     return render(request, 'blog/post.html', {'post': post, 'comments': comments, 'comment_form': comment_form})
+
+
+@login_required
+def LikeThisPost(request, pk):
+    post = get_object_or_404(Post, id=pk)
+    user = get_user(request)
+    post_liked = LikePost.objects.filter(post_id=post.id, auth_user_id=get_user(request).id)
+    request.post_id = pk
+    if request.method == 'POST':
+        if not post_liked:
+            new_like = LikePost()
+            new_like.post_id = post.id
+            new_like.auth_user_id = user.id
+            new_like.save()
+        else:
+            post_liked.delete()
+    return redirect(f'../{pk}')
+
+
+@login_required
+def LikeThisComment(request, pk, cpk):
+    print(f"[CHECK] {pk} {cpk}")
+    comment = get_object_or_404(Comment, id=cpk)
+    user = get_user(request)
+    comment_liked = LikeComment.objects.filter(comment_id=comment.id, auth_user_id=get_user(request).id)
+    request.comment_id = cpk
+    if request.method == 'GET':
+        if not comment_liked:
+            print("[GO]")
+            new_like = LikeComment()
+            new_like.comment_id = comment.id
+            new_like.auth_user_id = user.id
+            new_like.save()
+    return redirect(f'../../{pk}')
+
+@login_required
+def LikeThisProject(request, pk):
+    project = get_object_or_404(Project, id=pk)
+    user = get_user(request)
+    project_liked = LikeProject.objects.filter(project_id=project.id, auth_user_id=get_user(request).id)
+    request.project_id = pk
+    if request.method == 'POST':
+        if not project_liked:
+            new_like = LikeProject()
+            new_like.project_id = project.id
+            new_like.auth_user_id = user.id
+            new_like.save()
+    return redirect(f'repositories')
 

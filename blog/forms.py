@@ -5,7 +5,7 @@ from django.contrib.auth.forms import UserCreationForm
 # Create your forms here.
 from django.contrib.auth.models import User
 
-from blog.models import Comment
+from blog.models import Comment, LikePost
 
 
 class NewUserForm(UserCreationForm):
@@ -27,3 +27,4 @@ class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
         fields = ('description',)
+

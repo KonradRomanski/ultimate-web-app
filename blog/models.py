@@ -1,4 +1,4 @@
-from django.db import models
+from django.db import models, connection
 from django.contrib.auth.models import User
 
 
@@ -11,12 +11,21 @@ class Post(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     auth_user = models.ForeignKey(User, on_delete=models.PROTECT)
+
     # likes = models.ManyToManyField(settings.AUTH)
+
+    def get_likes(self):
+        args = (self.id, 0)
+        cursor = connection.cursor()
+        cursor.callproc('count_post_likes', args)
+        cursor.execute('SELECT @_count_post_likes_1')
+        return cursor.fetchone()[0]
 
 
 class Project(models.Model):
     class Meta:
         db_table = 'project'
+
     name = models.CharField(max_length=180)
     github_link = models.CharField(max_length=200)
     description = models.TextField()
@@ -24,14 +33,12 @@ class Project(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     post = models.ForeignKey(Post, on_delete=models.CASCADE, blank=True, null=True)
 
-
-class Stat(models.Model):
-    class Meta:
-        db_table = 'stat'
-
-    action_name = models.CharField(max_length=100, primary_key=True)
-    number = models.IntegerField()
-    last_action = models.DateTimeField()
+    def get_likes(self):
+        args = (self.id, 0)
+        cursor = connection.cursor()
+        cursor.callproc('count_project_likes', args)
+        cursor.execute('SELECT @count_project_likes_1')
+        return cursor.fetchone()[0]
 
 
 class Comment(models.Model):
@@ -45,6 +52,15 @@ class Comment(models.Model):
 
     def __str__(self):
         return 'Comment {} by {}'.format(self.description, self.auth_user.username)
+
+    def get_likes(self):
+        args = (self.id, 0)
+        cursor = connection.cursor()
+        cursor.callproc('count_comment_likes', args)
+        cursor.execute('SELECT @_count_comment_likes_1')
+        # print(f"[LOG] {self.id} {args}");
+        return cursor.fetchone()[0]
+        # return cursor.fetchall()
 
 
 class LikeProject(models.Model):
