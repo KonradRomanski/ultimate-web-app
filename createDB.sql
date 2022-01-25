@@ -1,239 +1,200 @@
+CREATE DATABASE `ultimate_web_app` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 
-CREATE TABLE comments (
-    id          INTEGER NOT NULL,
-    description CLOB NOT NULL,
-    user_id     INTEGER NOT NULL,
-    post_id     INTEGER NOT NULL
-);
+CREATE TABLE `django_session` (
+  `session_key` varchar(40) NOT NULL,
+  `session_data` longtext NOT NULL,
+  `expire_date` datetime(6) NOT NULL,
+  PRIMARY KEY (`session_key`),
+  KEY `django_session_expire_date_a5c62663` (`expire_date`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-ALTER TABLE comments ADD CONSTRAINT comments_pk PRIMARY KEY ( id );
+CREATE TABLE `django_migrations` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `app` varchar(255) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `applied` datetime(6) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-CREATE TABLE like_comments (
-    user_id    INTEGER NOT NULL,
-    comments_id INTEGER NOT NULL
-);
+CREATE TABLE `django_content_type` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `app_label` varchar(100) NOT NULL,
+  `model` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `django_content_type_app_label_model_76bd3d3b_uniq` (`app_label`,`model`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-ALTER TABLE like_comments ADD CONSTRAINT like_comments_pk PRIMARY KEY ( user_id,
-                                                                      comments_id );
-
-CREATE TABLE like_post (
-    user_id INTEGER NOT NULL,
-    post_id INTEGER NOT NULL
-);
-
-ALTER TABLE like_post ADD CONSTRAINT like_post_pk PRIMARY KEY ( user_id,
-                                                                post_id );
-
-CREATE TABLE like_project (
-    user_id    INTEGER NOT NULL,
-    project_id INTEGER NOT NULL
-);
-
-ALTER TABLE like_project ADD CONSTRAINT like_project_pk PRIMARY KEY ( user_id,
-                                                                      project_id );
-
-CREATE TABLE log (
-    action_type VARCHAR2(100) NOT NULL,
-    action_time TIMESTAMP NOT NULL,
-    table_name  VARCHAR2(100) NOT NULL,
-    user_id     INTEGER NOT NULL
-);
-
-CREATE TABLE post (
-    id         INTEGER NOT NULL,
-    title     VARCHAR2(180) NOT NULL,
-    content    CLOB,
-    created_at TIMESTAMP NOT NULL,
-    updated_at TIMESTAMP,
-    user_id    INTEGER,
-    project_id INTEGER
-);
-
-ALTER TABLE post ADD CONSTRAINT post_pk PRIMARY KEY ( id );
-
-CREATE TABLE project (
-    id          INTEGER NOT NULL,
-    name        VARCHAR2(180) NOT NULL,
-    github_link VARCHAR2(200),
-    description CLOB,
-    created_at  TIMESTAMP NOT NULL,
-    updated_at  TIMESTAMP
-);
-
-ALTER TABLE project ADD CONSTRAINT project_pk PRIMARY KEY ( id );
-
-CREATE TABLE role (
-    name             VARCHAR2(30) NOT NULL,
-    permission_level INTEGER NOT NULL
-);
-
-ALTER TABLE role ADD CONSTRAINT role_pk PRIMARY KEY ( name );
-
-CREATE TABLE stat (
-    action_name VARCHAR2(100) NOT NULL,
-    number    INTEGER,
-    last_action TIMESTAMP
-);
-
-CREATE TABLE user (
-    id              INTEGER NOT NULL,
-    email           VARCHAR2(50) NOT NULL,
-    password        VARCHAR2(30) NOT NULL,
-    email_confirmed BLOB,
-    first_name      VARCHAR2(20),
-    last_name       VARCHAR2(20),
-    created_at      TIMESTAMP NOT NULL,
-    updated_at      TIMESTAMP,
-    role_name       VARCHAR2(30) NOT NULL
-);
-
-CREATE UNIQUE INDEX user__idx ON
-    user (
-        role_name
-    ASC );
-
-ALTER TABLE user ADD CONSTRAINT user_pk PRIMARY KEY ( id );
-
-ALTER TABLE comments
-    ADD CONSTRAINT comments_post_fk FOREIGN KEY ( post_id )
-        REFERENCES post ( id );
-
-ALTER TABLE comments
-    ADD CONSTRAINT comments_user_fk FOREIGN KEY ( user_id )
-        REFERENCES user ( id );
-
-ALTER TABLE like_comments
-    ADD CONSTRAINT like_comments_comments_fk FOREIGN KEY ( comments_id )
-        REFERENCES comments ( id );
-
-ALTER TABLE like_comments
-    ADD CONSTRAINT like_comments_user_fk FOREIGN KEY ( user_id )
-        REFERENCES user ( id );
-
-ALTER TABLE like_post
-    ADD CONSTRAINT like_post_post_fk FOREIGN KEY ( post_id )
-        REFERENCES post ( id );
-
-ALTER TABLE like_post
-    ADD CONSTRAINT like_post_user_fk FOREIGN KEY ( user_id )
-        REFERENCES user ( id );
-
-ALTER TABLE like_project
-    ADD CONSTRAINT like_project_project_fk FOREIGN KEY ( project_id )
-        REFERENCES project ( id );
-
-ALTER TABLE like_project
-    ADD CONSTRAINT like_project_user_fk FOREIGN KEY ( user_id )
-        REFERENCES user ( id );
-
-ALTER TABLE log
-    ADD CONSTRAINT log_user_fk FOREIGN KEY ( user_id )
-        REFERENCES user ( id );
-
-ALTER TABLE post
-    ADD CONSTRAINT post_project_fk FOREIGN KEY ( project_id )
-        REFERENCES project ( id );
-
-ALTER TABLE post
-    ADD CONSTRAINT post_user_fk FOREIGN KEY ( user_id )
-        REFERENCES user ( id );
-
-ALTER TABLE user
-    ADD CONSTRAINT user_role_fk FOREIGN KEY ( role_name )
-        REFERENCES role ( name );
-
-CREATE SEQUENCE comments_id_seq START WITH 1 NOCACHE ORDER;
-
-CREATE OR REPLACE TRIGGER comments_id_trg BEFORE
-    INSERT ON comments
-    FOR EACH ROW
-    WHEN ( new.id IS NULL )
-BEGIN
-    :new.id := comments_id_seq.nextval;
-END;
-/
-
-CREATE SEQUENCE post_id_seq START WITH 1 NOCACHE ORDER;
-
-CREATE OR REPLACE TRIGGER post_id_trg BEFORE
-    INSERT ON post
-    FOR EACH ROW
-    WHEN ( new.id IS NULL )
-BEGIN
-    :new.id := post_id_seq.nextval;
-END;
-/
-
-CREATE SEQUENCE project_id_seq START WITH 1 NOCACHE ORDER;
-
-CREATE OR REPLACE TRIGGER project_id_trg BEFORE
-    INSERT ON project
-    FOR EACH ROW
-    WHEN ( new.id IS NULL )
-BEGIN
-    :new.id := project_id_seq.nextval;
-END;
-/
-
-CREATE SEQUENCE user_id_seq START WITH 1 NOCACHE ORDER;
-
-CREATE OR REPLACE TRIGGER user_id_trg BEFORE
-    INSERT ON user
-    FOR EACH ROW
-    WHEN ( new.id IS NULL )
-BEGIN
-    :new.id := user_id_seq.nextval;
-END;
-/
-
-CREATE OR REPLACE FUNCTION PostAboutProject
-    (v_project_id NUMBER, v_user_id NUMBER)
-    RETURN NATURAL IS status NATURAL;
+CREATE TABLE `django_admin_log` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `action_time` datetime(6) NOT NULL,
+  `object_id` longtext,
+  `object_repr` varchar(200) NOT NULL,
+  `action_flag` smallint unsigned NOT NULL,
+  `change_message` longtext NOT NULL,
+  `content_type_id` int DEFAULT NULL,
+  `user_id` int NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `django_admin_log_content_type_id_c4bce8eb_fk_django_co` (`content_type_id`),
+  KEY `django_admin_log_user_id_c564eba6_fk_auth_user_id` (`user_id`),
+  CONSTRAINT `django_admin_log_content_type_id_c4bce8eb_fk_django_co` FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`),
+  CONSTRAINT `django_admin_log_user_id_c564eba6_fk_auth_user_id` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`),
+  CONSTRAINT `django_admin_log_chk_1` CHECK ((`action_flag` >= 0))
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 
-v_name VARCHAR(40);
+CREATE TABLE `auth_user` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `password` varchar(128) NOT NULL,
+  `last_login` datetime(6) DEFAULT NULL,
+  `is_superuser` tinyint(1) NOT NULL,
+  `username` varchar(150) NOT NULL,
+  `first_name` varchar(150) NOT NULL,
+  `last_name` varchar(150) NOT NULL,
+  `email` varchar(254) NOT NULL,
+  `is_staff` tinyint(1) NOT NULL,
+  `is_active` tinyint(1) NOT NULL,
+  `date_joined` datetime(6) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `username` (`username`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-BEGIN 
-    SELECT name INTO v_name FROM project WHERE project_id = v_project_id;
-    INSERT INTO POST(title, project_project_id, user_user_id) VALUES('Let`s talk about ' || v_name, v_project_id, v_user_id);
-    status := 1;
-RETURN status;
-EXCEPTION WHEN NO_DATA_FOUND THEN
-    status := 0;
-    RETURN status;
-END PostAboutProject;
+CREATE TABLE `auth_user_user_permissions` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `user_id` int NOT NULL,
+  `permission_id` int NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `auth_user_user_permissions_user_id_permission_id_14a6b632_uniq` (`user_id`,`permission_id`),
+  KEY `auth_user_user_permi_permission_id_1fbb5f2c_fk_auth_perm` (`permission_id`),
+  CONSTRAINT `auth_user_user_permi_permission_id_1fbb5f2c_fk_auth_perm` FOREIGN KEY (`permission_id`) REFERENCES `auth_permission` (`id`),
+  CONSTRAINT `auth_user_user_permissions_user_id_a95ead1b_fk_auth_user_id` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+CREATE TABLE `auth_user_groups` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `user_id` int NOT NULL,
+  `group_id` int NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `auth_user_groups_user_id_group_id_94350c0c_uniq` (`user_id`,`group_id`),
+  KEY `auth_user_groups_group_id_97559544_fk_auth_group_id` (`group_id`),
+  CONSTRAINT `auth_user_groups_group_id_97559544_fk_auth_group_id` FOREIGN KEY (`group_id`) REFERENCES `auth_group` (`id`),
+  CONSTRAINT `auth_user_groups_user_id_6a12ed8b_fk_auth_user_id` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-CREATE OR REPLACE PROCEDURE SetDefaultStats AS
-if_exists NUMBER;
-BEGIN
-    SELECT count(*) into if_exists FROM stat where action_name = 'UserCounter';
-    IF if_exists = 0 THEN
-        INSERT INTO stat(action_name)
-            VALUES(
-            'UserCounter'
-        );
-    END IF;
-    
-    SELECT count(*) into if_exists FROM stat where action_name = 'PostCounter';
-    IF if_exists = 0 THEN
-        INSERT INTO stat(action_name)
-            VALUES(
-            'PostCounter'
-        );
-    END IF;
-    
-    
-    UPDATE stat
-        SET counter = (SELECT count(*) FROM user),
-        last_action = CURRENT_DATE
-        WHERE action_name = 'UserCounter';
-    
-    
-    UPDATE stat
-        SET counter = (SELECT count(*) FROM post),
-        last_action = CURRENT_DATE
-        WHERE action_name = 'PostCounter';
+CREATE TABLE `auth_permission` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `content_type_id` int NOT NULL,
+  `codename` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `auth_permission_content_type_id_codename_01ab375a_uniq` (`content_type_id`,`codename`),
+  CONSTRAINT `auth_permission_content_type_id_2f476e4b_fk_django_co` FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-    
-END SetDefaultStats;
+CREATE TABLE `auth_group` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(150) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `name` (`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `auth_group_permissions` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `group_id` int NOT NULL,
+  `permission_id` int NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `auth_group_permissions_group_id_permission_id_0cd325b0_uniq` (`group_id`,`permission_id`),
+  KEY `auth_group_permissio_permission_id_84c5c92e_fk_auth_perm` (`permission_id`),
+  CONSTRAINT `auth_group_permissio_permission_id_84c5c92e_fk_auth_perm` FOREIGN KEY (`permission_id`) REFERENCES `auth_permission` (`id`),
+  CONSTRAINT `auth_group_permissions_group_id_b120cbf9_fk_auth_group_id` FOREIGN KEY (`group_id`) REFERENCES `auth_group` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `post` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `title` varchar(180) NOT NULL,
+  `content` longtext NOT NULL,
+  `created_at` datetime(6) NOT NULL,
+  `updated_at` datetime(6) NOT NULL,
+  `auth_user_id` int NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `post_auth_user_id_b7054272_fk_auth_user_id` (`auth_user_id`),
+  CONSTRAINT `post_auth_user_id_b7054272_fk_auth_user_id` FOREIGN KEY (`auth_user_id`) REFERENCES `auth_user` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `project` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `name` varchar(180) NOT NULL,
+  `github_link` varchar(200) NOT NULL,
+  `description` longtext NOT NULL,
+  `created_at` datetime(6) NOT NULL,
+  `updated_at` datetime(6) NOT NULL,
+  `post_id` bigint DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `project_post_id_7f8acf77_fk_post_id` (`post_id`),
+  CONSTRAINT `project_post_id_7f8acf77_fk_post_id` FOREIGN KEY (`post_id`) REFERENCES `post` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `comment` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `description` longtext NOT NULL,
+  `auth_user_id` int NOT NULL,
+  `post_id` bigint NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `comment_auth_user_id_01bf9c1e_fk_auth_user_id` (`auth_user_id`),
+  KEY `comment_post_id_d299ca5f_fk_post_id` (`post_id`),
+  CONSTRAINT `comment_auth_user_id_01bf9c1e_fk_auth_user_id` FOREIGN KEY (`auth_user_id`) REFERENCES `auth_user` (`id`),
+  CONSTRAINT `comment_post_id_d299ca5f_fk_post_id` FOREIGN KEY (`post_id`) REFERENCES `post` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `like_project` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `auth_user_id` int NOT NULL,
+  `project_id` bigint NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `like_project_auth_user_id_project_id_5be4c690_uniq` (`auth_user_id`,`project_id`),
+  KEY `like_project_project_id_9f750c45_fk_project_id` (`project_id`),
+  CONSTRAINT `like_project_auth_user_id_4428240f_fk_auth_user_id` FOREIGN KEY (`auth_user_id`) REFERENCES `auth_user` (`id`),
+  CONSTRAINT `like_project_project_id_9f750c45_fk_project_id` FOREIGN KEY (`project_id`) REFERENCES `project` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `like_post` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `auth_user_id` int NOT NULL,
+  `post_id` bigint NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `like_post_auth_user_id_post_id_974e1189_uniq` (`auth_user_id`,`post_id`),
+  KEY `like_post_post_id_747a2a59_fk_post_id` (`post_id`),
+  CONSTRAINT `like_post_auth_user_id_6c95d4ed_fk_auth_user_id` FOREIGN KEY (`auth_user_id`) REFERENCES `auth_user` (`id`),
+  CONSTRAINT `like_post_post_id_747a2a59_fk_post_id` FOREIGN KEY (`post_id`) REFERENCES `post` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `like_comment` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `auth_user_id` int NOT NULL,
+  `comment_id` bigint NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `like_comment_auth_user_id_comment_id_8d21e949_uniq` (`auth_user_id`,`comment_id`),
+  KEY `like_comment_comment_id_71723c24_fk_comment_id` (`comment_id`),
+  CONSTRAINT `like_comment_auth_user_id_224f1d58_fk_auth_user_id` FOREIGN KEY (`auth_user_id`) REFERENCES `auth_user` (`id`),
+  CONSTRAINT `like_comment_comment_id_71723c24_fk_comment_id` FOREIGN KEY (`comment_id`) REFERENCES `comment` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+delimiter //
+CREATE PROCEDURE count_post_likes (IN post_id INT, OUT n_likes INT)
+       BEGIN
+         SELECT COUNT(*) INTO n_likes FROM like_post
+         WHERE id = post_id;
+       END//
+
+CREATE PROCEDURE count_comment_likes (IN comment_id INT, OUT n_likes INT)
+       BEGIN 
+         SELECT COUNT(*) INTO n_likes FROM like_comment
+         WHERE id = comment_id;
+       END//
+
+CREATE PROCEDURE count_project_likes (IN project_id INT, OUT n_likes INT)
+       BEGIN
+         SELECT COUNT(*) INTO n_likes FROM like_project
+         WHERE id = project_id;
+       END//
+
+delimiter ;
