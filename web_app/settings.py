@@ -55,6 +55,8 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+
+
 ROOT_URLCONF = 'web_app.urls'
 
 TEMPLATES = [
@@ -83,8 +85,8 @@ DATABASES = {
     'default': {
         'ENGINE'  : 'django.db.backends.mysql',
         'NAME'    : 'ultimate_web_app',
-        'USER'    : 'root',
-        'PASSWORD': 'admin',
+        'USER'    : 'django',
+        'PASSWORD': 'django_db_pwd',
         'HOST'    : 'localhost',
         'PORT'    : '3306',
     }
