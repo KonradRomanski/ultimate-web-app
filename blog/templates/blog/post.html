@@ -26,6 +26,21 @@
           <div class="col-md-10 col-lg-8 col-xl-7">
             <p>
               {{ post.content }}
+            <form method="POST" action='./{{ request.post_id }}/like'>
+                {% if user.is_authenticated %}
+                  {% csrf_token %}
+                    <button class="btn btn-sm btn-primary ml-2" type="submit">
+                        {% if post.liked %}
+                            👍 Unlike
+                        {% else %}
+                            👍 Like
+                        {% endif %}
+                        ({{  post.get_likes }})
+                    </button>
+                {% else %}
+                <button class="btn btn-primary"> <a href="/login">Login to like a post</a></button>
+                {% endif %}
+            </form>
             </p>
           </div>
         </div>
@@ -76,20 +91,6 @@
             </form>
           </div>
         </div>
-
-    <div class="bg-light p-2">
-          <div class="d-flex flex-row align-items-start">
-            <form method="POST" action='./{{ request.post_id }}/like'>
-                {% if user.is_authenticated %}
-                  {% csrf_token %}
-                    <button class="btn btn-sm btn-primary ml-2" type="submit">👍 Like ({{  post.get_likes }})</button>
-                {% else %}
-                <button class="btn btn-primary"> <a href="/login">Login to like a post</a></button>
-                {% endif %}
-            </form>
-          </div>
-        </div>
-
       </div>
     </div>
   </div>

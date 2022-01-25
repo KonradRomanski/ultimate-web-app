@@ -6,7 +6,7 @@ urlpatterns = [
     # path('post/<int:pk>', PostView.as_view(), name='post'),
 
     path('post/<int:pk>', PostDetail, name='post'),
-    path('post', PostDetail, name='post'),
+    # path('post', PostDetail, name='post'),
 
     path('post/<int:pk>/like', LikeThisPost, name='post'),
 

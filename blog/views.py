@@ -3,13 +3,9 @@ from django.contrib.auth import login, authenticate, logout, get_user
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
 from django.shortcuts import render, redirect, get_object_or_404
-from django.http import HttpResponse
 from django.views.generic import ListView, DetailView
-# Create your views here.
 from blog.forms import NewUserForm, CommentForm
 from .models import Post, Project, LikePost, Comment, LikeProject, LikeComment
-from django.http import HttpResponseRedirect
-from django.urls import reverse_lazy, reverse
 
 
 def index(request):
@@ -86,6 +82,7 @@ class ListAFewPosts(ListView):
     template_name = 'blog/index.html'
 
 
+@login_required()
 class PostView(DetailView):
     model = Post
     template_name = 'blog/post.html'
@@ -124,6 +121,7 @@ def PostDetail(request, pk):
     user = get_user(request)
     comments = Comment.objects.filter(post_id=post.id)
     request.post_id = pk
+    post.liked = 1 if LikePost.objects.filter(post_id=post.id, auth_user_id=get_user(request).id) else 0
     if request.method == 'POST':
         comment_form = CommentForm(data=request.POST)
         if comment_form.is_valid():
@@ -139,6 +137,7 @@ def PostDetail(request, pk):
 
     return render(request, 'blog/post.html', {'post': post, 'comments': comments, 'comment_form': comment_form})
 
+
 @login_required
 def LikeThisPost(request, pk):
     post = get_object_or_404(Post, id=pk)
@@ -151,6 +150,8 @@ def LikeThisPost(request, pk):
             new_like.post_id = post.id
             new_like.auth_user_id = user.id
             new_like.save()
+        else:
+            post_liked.delete()
     return redirect(f'../{pk}')
 
 
@@ -182,5 +183,5 @@ def LikeThisProject(request, pk):
             new_like.project_id = project.id
             new_like.auth_user_id = user.id
             new_like.save()
-    return redirect(f'../{pk}')
+    return redirect(f'repositories')
 
